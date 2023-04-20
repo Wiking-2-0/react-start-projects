@@ -1,0 +1,21 @@
+.App {
+    padding-top: 56px;
+
+    .navbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: transparent !important;
+    }
+
+    .homepage {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding-top: 56px;
+        margin-top: -56px;
+        background-color: rgb(203, 207, 152);
+    }
+}
+
