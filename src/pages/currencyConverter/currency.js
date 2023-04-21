@@ -2,19 +2,21 @@ import React, { useEffect, useRef, useState } from 'react';
 import { CurrencyBlock } from '../../components/currencyConverter/currencyBlock';
 import './currency.scss';
 
+const defaultCurrency = 'USD';
+
 function CurrencyConverter() {
-    const [fromCurrency, setFromCurrency] = useState('UAH');
+    const [fromCurrency, setFromCurrency] = useState(defaultCurrency);
     const [fromPrice, setFromPrice] = useState(0);
-    const [toCurrency, setToCurrency] = useState('USD');
-    const [toPrice, setToPrice] = useState(1);
+    const [toCurrency, setToCurrency] = useState('UAH');
+    const [toPrice, setToPrice] = useState(0);
     const ratesRef = useRef([]);
 
     useEffect(() => {
-        fetch('https://cdn.cur.su/api/latest.json')
+        fetch(`https://api.exchangerate.host/latest?base=${defaultCurrency}`)
             .then(response => response.json())
             .then(json => {
                 ratesRef.current = json.rates;
-                onChangeToPrice(1)
+                setFromPrice(1);
             })
             .catch(err => {
                 console.error(err);
@@ -22,25 +24,19 @@ function CurrencyConverter() {
     }, [])
 
     useEffect(() => {
-        if (ratesRef.current.length !== 0)
-            onChangeFromPrice(fromPrice)
-    }, [fromCurrency])
+        if (ratesRef.current.length !== 0) {
+            const result = fromPrice / ratesRef.current[fromCurrency] * ratesRef.current[toCurrency];
 
-    useEffect(() => {
-        if (ratesRef.current.length !== 0)
-            onChangeToPrice(toPrice)
-    }, [toCurrency])
-
-    const onChangeFromPrice = (value) => {
-        const result = value / ratesRef.current[fromCurrency] * ratesRef.current[toCurrency];
-        setToPrice(result.toFixed(3))
-        setFromPrice(value)
-    }
+            if (Number(result) !== Number(toPrice)) {
+                setToPrice(result)
+            }
+        }
+    }, [fromPrice, fromCurrency, toCurrency])
 
     const onChangeToPrice = (value) => {
-        const result = (ratesRef.current[fromCurrency] / ratesRef.current[toCurrency]) * value;
-        setFromPrice(result.toFixed(3))
+        const result = value / ratesRef.current[toCurrency] * ratesRef.current[fromCurrency];
         setToPrice(value)
+        setFromPrice(result)
     }
 
     return (
@@ -49,14 +45,14 @@ function CurrencyConverter() {
                 <CurrencyBlock
                     value={fromPrice}
                     currency={fromCurrency}
-                    onChangeValue={onChangeFromPrice}
-                    onChangeCurrency={setFromCurrency}
+                    setNewValue={setFromPrice}
+                    setNewCurrency={setFromCurrency}
                 />
                 <CurrencyBlock
                     value={toPrice}
                     currency={toCurrency}
-                    onChangeValue={onChangeToPrice}
-                    onChangeCurrency={setToCurrency}
+                    setNewValue={onChangeToPrice}
+                    setNewCurrency={setToCurrency}
                 />
             </div>
         </div>

@@ -27,10 +27,10 @@ function Photos() {
             .then(res => res.json())
             .then(json => {
                 defaultCollections.current = sortItemsByCategory(json);
-                collection.current = [...defaultCollections.current[categoryId]];
+                collection.current = [...defaultCollections.current[0]];
                 const count = Math.ceil(json.length / pageLimit);
                 pages.current = count;
-                cropCollection()
+                cropCollection();
             })
             .catch((err) => {
                 console.error(err);
@@ -38,38 +38,39 @@ function Photos() {
             .finally(() => {
                 setLoading(false);
             });
+
+            const sortItemsByCategory = (items, categoryIndex = categories.length - 1, sortedItems = {}) => {
+                if (categoryIndex === 0) {
+                    return sortedItems;
+                }
+
+                const sortCategoryId = categories[categoryIndex].id;
+                sortedItems[sortCategoryId] = [];
+
+                if (categories.length - 1 === categoryIndex) {
+                    sortedItems[0] = [...items];
+                }
+
+                const newItems = items.filter(item => {
+                    if (item.id !== '0' && item.id % sortCategoryId === 0) {
+                        sortedItems[sortCategoryId].push(item);
+                        return false;
+                    }
+
+                    return true;
+                })
+
+                return sortItemsByCategory(newItems, --categoryIndex, sortedItems);
+            }
     }, [])
 
-    const sortItemsByCategory = (items, categoryIndex = categories.length - 1, sortedItems = {}) => {
-        if (categoryIndex === 0) {
-            return sortedItems;
-        }
 
-        const categoryId = categories[categoryIndex].id;
-        sortedItems[categoryId] = [];
-
-        if (categories.length - 1 === categoryIndex) {
-            sortedItems[0] = [...items];
-        }
-
-        const newItems = items.filter(item => {
-            if (item.id !== '0' && item.id % categoryId === 0) {
-                sortedItems[categoryId].push(item);
-                return false;
-            }
-
-            return true;
-        })
-
-        return sortItemsByCategory(newItems, --categoryIndex, sortedItems)
-    }
-
-    const filterCollection = (categoryId) => {
+    const switchCollection = (categoryId) => {
         activePage.current = 1;
         collection.current = [...defaultCollections.current[categoryId]]
         pages.current = Math.ceil(collection.current.length / pageLimit);
 
-        cropCollection()
+        cropCollection();
         setCategoryId(categoryId);
     }
 
@@ -77,12 +78,12 @@ function Photos() {
         const startIndex = (activePage.current - 1) * pageLimit;
         const collectionsPart = [...collection.current].splice(startIndex, pageLimit);
 
-        setFilteredCollections(collectionsPart)
+        setFilteredCollections(collectionsPart);
     }
 
     const onPaginationClick = (index) => {
         activePage.current = index;
-        cropCollection()
+        cropCollection();
     }
 
     return (
@@ -96,7 +97,7 @@ function Photos() {
                                 <li
                                     className={`${categoryId === cat.id ? 'active' : ''}`}
                                     key={cat.id}
-                                    onClick={filterCollection.bind(null, cat.id)}
+                                    onClick={switchCollection.bind(null, cat.id)}
                                 >
                                     {cat.name}
                                 </li>

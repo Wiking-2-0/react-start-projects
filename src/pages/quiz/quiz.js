@@ -3,21 +3,21 @@ import './quiz.scss';
 
 const questionsList = [
     {
-        title: 'React - это ... ?',
-        variants: ['библиотека', 'фреймворк', 'приложение'],
+        title: 'React is a ... ?',
+        variants: ['library', 'framework', 'application'],
         correct: 0,
     },
     {
-        title: 'Компонент - это ... ',
-        variants: ['приложение', 'часть приложения или страницы', 'то, что я не знаю что такое'],
+        title: 'Component is a ... ',
+        variants: ['application', 'part of app or page', 'that I don\'t know what it is'],
         correct: 1,
     },
     {
-        title: 'Что такое JSX?',
+        title: 'What is JSX?',
         variants: [
-            'Это простой HTML',
-            'Это функция',
-            'Это тот же HTML, но с возможностью выполнять JS-код',
+            'It\'s just HTML code',
+            'It\'s a function',
+            'It\'s the same HTML code, but  with the ability to execute JS code',
         ],
         correct: 2,
     },
@@ -27,8 +27,8 @@ function Result({correct, resetQuiz}) {
     return (
         <div className="result">
             <img src="https://cdn-icons-png.flaticon.com/512/2278/2278992.png" alt='Success icon' />
-            <h2>Вы отгадали {correct} ответа из {questionsList.length}</h2>
-            <button type='button' onClick={resetQuiz}>Попробовать снова</button>
+            <h2>You have guessed {correct} out of the {questionsList.length} correct answers</h2>
+            <button type='button' onClick={resetQuiz}>Try again</button>
         </div>
     );
 }

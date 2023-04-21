@@ -3,8 +3,6 @@ import { Success } from '../../components/usersList/Success';
 import { Users } from '../../components/usersList/Users';
 import './users.scss';
 
-// Тут список пользователей: https://reqres.in/api/users
-
 function UsersList() {
     const [users, setUsers] = useState([]);
     const [invites, setInvites] = useState([]);

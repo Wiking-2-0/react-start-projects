@@ -11,7 +11,12 @@ import Photos from './pages/photos/photos';
 
 const App = () => {
     const pages = [
-        {name: 'Home', url: '/', exact: true, component: <div className='homepage'><h1>React Projects List Homepage</h1></div>},
+        {
+            name: 'Home', url: '/', exact: true, component: <div className='homepage'>
+                <h1>React Projects List Homepage</h1>
+                <a href="https://github.com/Wiking-2-0/react-start-projects" target='_blank' rel="noreferrer"><h2>View on Github</h2></a>
+            </div>
+        },
         {name: 'Counter List', url: '/counter-list', component: <CountersList />},
         {name: 'Modal', url: '/modal', component: <Modal />},
         {name: 'Quiz', url: '/quiz', component: <Quiz />},
