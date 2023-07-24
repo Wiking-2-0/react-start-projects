@@ -1,0 +1,137 @@
+.slot-machine {
+    min-width: 664px;
+    max-width: 664px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 200px auto;
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.reels {
+    display: flex;
+}
+
+.reel-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 300px;
+    width: 100px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    margin: 0 10px;
+    overflow: hidden;
+}
+
+.reel {
+    transition: transform 2s ease-in;
+}
+
+.symbol {
+    width: 100px;
+    height: 100px;
+    font-size: 30px;
+    line-height: 100px;
+    text-align: center;
+    background-size: 132%;
+}
+
+.spin-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.spin-button:hover {
+    background-color: #0056b3;
+}
+
+.bg-ace {
+    background-image: url('reel_sprite.png');
+    background-position: -16px -16px;
+    // background-position: -10px -10px;
+}
+
+.bg-crab {
+    background-image: url('reel_sprite.png');
+    background-position: -16px -148px;
+    // background-position: -10px -95px;
+}
+
+.bg-dolph {
+    background-image: url('reel_sprite.png');
+    background-position: -16px -280px;
+    // background-position: -10px -180px;
+}
+
+.bg-fish {
+    background-image: url('reel_sprite.png');
+    background-position: -16px -412px;
+    // background-position: -10px -265px;
+}
+
+.bg-jack {
+    background-image: url('reel_sprite.png');
+    background-position: -16px -544px;
+    // background-position: -10px -350px;
+}
+
+.bg-king {
+    background-image: url('reel_sprite.png');
+    background-position: -16px -676px;
+    // background-position: -10px -435px;
+}
+
+.bg-lionfish {
+    background-image: url('reel_sprite.png');
+    background-position: -16px -808px;
+    // background-position: -10px -520px;
+}
+
+.bg-nine {
+    background-image: url('reel_sprite.png');
+    background-position: -16px -940px;
+    // background-position: -10px -605px;
+}
+
+.bg-octo {
+    background-image: url('reel_sprite.png');
+    background-position: -16px -1072px;
+    // background-position: -10px -690px;
+}
+
+.bg-pearl {
+    background-image: url('reel_sprite.png');
+    background-position: -16px -1204px;
+    // background-position: -10px -775px;
+}
+
+.bg-queen {
+    background-image: url('reel_sprite.png');
+    background-position: -16px -1336px;
+    // background-position: -10px -860px;
+}
+
+.bg-seahorse {
+    background-image: url('reel_sprite.png');
+    background-position: -16px -1468px;
+    // background-position: -10px -945px;
+}
+
+.bg-ten {
+    background-image: url('reel_sprite.png');
+    background-position: -16px -1600px;
+    // background-position: -10px -1030px;
+}

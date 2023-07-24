@@ -8,6 +8,7 @@ import Quiz from './pages/quiz/quiz';
 import UsersList from './pages/users/usersList';
 import CurrencyConverter from './pages/currencyConverter/currency';
 import Photos from './pages/photos/photos';
+import SlotMachine from './pages/slotMachine/slotMachine';
 
 const App = () => {
     const pages = [
@@ -23,6 +24,7 @@ const App = () => {
         {name: 'Users', url: '/users', component: <UsersList />},
         {name: 'Currency Converter', url: '/currency', component: <CurrencyConverter />},
         {name: 'Photo Collection', url: '/photos', component: <Photos />},
+        {name: 'Slot Machine', url: '/slot-machine', component: <SlotMachine />},
     ]
 
     return (
